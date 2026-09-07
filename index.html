@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heftweise – Sportschule Halle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF7EE;
+    --paper-line:#c9dced;
+    --margin-red:#B23A48;
+    --ink:#232C3B;
+    --ink-soft:#5b6472;
+    --highlight:#F4C95D;
+    --chalk-green:#3F6B4E;
+    --chalk-green-dark:#2E4F39;
+    --card-shadow: 2px 4px 0 rgba(35,44,59,0.08);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image: repeating-linear-gradient(var(--paper) 0px, var(--paper) 31px, var(--paper-line) 32px);
+    font-family:'Nunito', sans-serif;
+    color:var(--ink);
+    position:relative;
+    min-height:100vh;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    top:0; bottom:0; left:38px;
+    width:2px;
+    background:var(--margin-red);
+    opacity:0.35;
+    z-index:0;
+  }
+  .wrap{
+    position:relative;
+    z-index:1;
+    max-width:1000px;
+    margin:0 auto;
+    padding:24px 24px 80px 56px;
+  }
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+  }
+  .logo-block{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .logo{
+    font-family:'Kalam', cursive;
+    font-weight:700;
+    font-size:2.1rem;
+    color:var(--chalk-green-dark);
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    transform:rotate(-1deg);
+  }
+  .logo span.dot{ color:var(--margin-red); }
+  .school-badge{
+    background:var(--chalk-green-dark);
+    color:#fff;
+    font-weight:800;
+    font-size:0.75rem;
+    padding:5px 10px;
+    border-radius:20px;
+    letter-spacing:0.02em;
+    transform:rotate(-2deg);
+    white-space:nowrap;
+  }
+  .tagline{
+    font-size:0.95rem;
+    color:var(--ink-soft);
+    margin-top:-6px;
+  }
+  .user-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:0.9rem;
+  }
+  .user-box .who{ font-weight:700; }
+  .user-box .who .klasse{ color:var(--ink-soft); font-weight:600; }
+  .btn{
+    font-family:'Nunito', sans-serif;
+    font-weight:800;
+    font-size:0.95rem;
+    padding:12px 20px;
+    border-radius:6px;
+    border:2px solid var(--chalk-green-dark);
+    background:var(--chalk-green);
+    color:#fff;
+    cursor:pointer;
+    box-shadow: var(--card-shadow);
+    transition: transform .12s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn.secondary{
+    background:transparent;
+    color:var(--chalk-green-dark);
+  }
+  .btn.small{ padding:8px 14px; font-size:0.85rem; }
+  .btn.link{
+    background:none; border:none; box-shadow:none;
+    color:var(--margin-red); font-weight:700; padding:6px 4px; text-decoration:underline;
+  }
+
+  .searchbar{ display:flex; gap:10px; margin-bottom:18px; flex-wrap:wrap; }
+  .searchbar input[type="text"]{
+    flex:1; min-width:200px; padding:12px 14px;
+    border:2px solid #d8cfc0; border-radius:6px;
+    font-family:'Nunito', sans-serif; font-size:0.95rem; background:#fff;
+  }
+  .searchbar input[type="text"]:focus{ outline:2px solid var(--chalk-green); border-color:var(--chalk-green); }
+
+  .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px; }
+  .chip{
+    padding:7px 14px; border-radius:20px; border:2px solid #d8cfc0;
+    background:#fff; font-size:0.85rem; font-weight:700; cursor:pointer; color:var(--ink-soft);
+  }
+  .chip.active{ background:var(--highlight); border-color:var(--highlight); color:var(--ink); }
+
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(210px,1fr)); gap:20px; }
+  .card{
+    background:#fff; border-radius:4px; padding:14px;
+    box-shadow: var(--card-shadow); cursor:pointer; position:relative; border:1px solid #ece4d4;
+  }
+  .card:nth-child(3n+1){ transform:rotate(-0.6deg); }
+  .card:nth-child(3n+2){ transform:rotate(0.5deg); }
+  .card:nth-child(3n){ transform:rotate(-0.3deg); }
+  .card:hover{ transform:rotate(0deg) translateY(-3px); }
+  .card .thumb{
+    height:110px; border-radius:4px; background:#eef3ee;
+    display:flex; align-items:center; justify-content:center; font-size:2.6rem; margin-bottom:10px;
+  }
+  .card .title{ font-weight:800; font-size:0.98rem; margin-bottom:4px; line-height:1.25; }
+  .card .meta{ font-size:0.8rem; color:var(--ink-soft); margin-bottom:6px; }
+  .card .price{ font-family:'Kalam', cursive; font-size:1.3rem; color:var(--margin-red); font-weight:700; }
+  .card .pin{
+    position:absolute; top:-8px; left:16px; width:16px; height:16px; border-radius:50%;
+    background:var(--margin-red); box-shadow:0 2px 3px rgba(0,0,0,0.25);
+  }
+
+  .empty{ text-align:center; padding:60px 20px; color:var(--ink-soft); }
+  .empty .big{ font-family:'Kalam', cursive; font-size:1.6rem; color:var(--chalk-green-dark); display:block; margin-bottom:8px; }
+
+  .overlay{
+    position:fixed; inset:0; background:rgba(35,44,59,0.45);
+    display:none; align-items:flex-start; justify-content:center;
+    padding:40px 16px; overflow-y:auto; z-index:50;
+  }
+  .overlay.show{ display:flex; }
+  .modal{
+    background:var(--paper);
+    background-image: repeating-linear-gradient(var(--paper) 0px, var(--paper) 27px, var(--paper-line) 28px);
+    border-radius:8px; max-width:480px; width:100%; padding:26px; position:relative;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  }
+  .modal .close{ position:absolute; top:14px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:var(--ink-soft); }
+  .modal h2{ font-family:'Kalam', cursive; color:var(--chalk-green-dark); margin-top:0; margin-bottom:4px; font-size:1.5rem; }
+  .modal label{ display:block; font-weight:700; font-size:0.85rem; margin:14px 0 6px; }
+  .modal input, .modal select, .modal textarea{
+    width:100%; padding:10px 12px; border:2px solid #d8cfc0; border-radius:6px;
+    font-family:'Nunito', sans-serif; font-size:0.95rem; background:#fff;
+  }
+  .modal textarea{ resize:vertical; min-height:70px; }
+  .modal .emoji-row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:6px; }
+  .emoji-choice{
+    width:42px; height:42px; border-radius:6px; border:2px solid #d8cfc0; background:#fff;
+    font-size:1.4rem; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .emoji-choice.selected{ border-color:var(--chalk-green); background:#eef3ee; }
+  .modal .actions{ margin-top:20px; display:flex; gap:10px; }
+  .detail-thumb{
+    height:150px; border-radius:6px; background:#eef3ee;
+    display:flex; align-items:center; justify-content:center; font-size:4rem; margin-bottom:14px;
+  }
+  .detail-price{ font-family:'Kalam', cursive; font-size:1.8rem; color:var(--margin-red); font-weight:700; margin-bottom:2px; }
+  .detail-meta{ font-size:0.9rem; color:var(--ink-soft); margin-bottom:14px; }
+  .detail-desc{ font-size:0.95rem; line-height:1.5; margin-bottom:6px; }
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+    background:var(--chalk-green-dark); color:#fff; padding:12px 22px; border-radius:6px;
+    font-weight:700; font-size:0.9rem; opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:100;
+  }
+  .toast.show{ opacity:1; }
+
+  /* Auth screen */
+  #authScreen{
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; position:relative; z-index:1;
+  }
+  .auth-card{
+    background:#fff; border-radius:10px; max-width:400px; width:100%;
+    padding:30px; box-shadow: var(--card-shadow); border:1px solid #ece4d4;
+  }
+  .auth-tabs{ display:flex; gap:8px; margin-bottom:18px; }
+  .auth-tab{
+    flex:1; text-align:center; padding:10px; border-radius:6px; font-weight:800; cursor:pointer;
+    background:#f2ede1; color:var(--ink-soft); font-size:0.9rem;
+  }
+  .auth-tab.active{ background:var(--chalk-green); color:#fff; }
+  .auth-form{ display:none; }
+  .auth-form.active{ display:block; }
+  .field-error{ color:var(--margin-red); font-size:0.82rem; margin-top:4px; min-height:1em; }
+  .auth-hint{ font-size:0.78rem; color:var(--ink-soft); margin-top:16px; line-height:1.4; }
+  .profile-btn{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 14px; border:2px solid #d8cfc0; border-radius:6px;
+    margin-bottom:8px; cursor:pointer; background:#fff;
+  }
+  .profile-btn:hover{ border-color:var(--chalk-green); }
+  .profile-btn .name{ font-weight:800; }
+  .profile-btn .klasse{ color:var(--ink-soft); font-size:0.85rem; }
+
+  @media (prefers-reduced-motion: reduce){ .card, .btn { transition:none; } }
+</style>
+</head>
+<body>
+
+<!-- AUTH SCREEN -->
+<div id="authScreen">
+  <div class="auth-card">
+    <div class="logo">Heftweise<span class="dot">.</span></div>
+    <div class="school-badge" style="display:inline-block; margin:8px 0 18px;">SPORTSCHULE HALLE</div>
+    <div class="tagline" style="margin-bottom:20px;">Nur für Schüler:innen der Sportschule Halle.</div>
+
+    <div class="auth-tabs">
+      <div class="auth-tab active" id="tabLogin">Mein Profil</div>
+      <div class="auth-tab" id="tabRegister">Neues Profil</div>
+    </div>
+
+    <div class="auth-form active" id="loginForm">
+      <label for="lUsername">Nutzername</label>
+      <input type="text" id="lUsername" placeholder="z. B. jonas.k">
+      <label for="lPassword">Passwort</label>
+      <input type="password" id="lPassword" placeholder="••••••••">
+      <div class="field-error" id="loginError"></div>
+      <div class="actions" style="margin-top:10px;">
+        <button class="btn" id="doLogin">Anmelden</button>
+      </div>
+    </div>
+
+    <div class="auth-form" id="registerForm">
+      <label for="rName">Vorname</label>
+      <input type="text" id="rName" placeholder="z. B. Jonas">
+      <label for="rKlasse">Klasse</label>
+      <input type="text" id="rKlasse" placeholder="z. B. 8b">
+      <label for="rUsername">Nutzername</label>
+      <input type="text" id="rUsername" placeholder="Frei wählbar, z. B. jonas.k">
+      <label for="rPassword">Passwort</label>
+      <input type="password" id="rPassword" placeholder="mind. 6 Zeichen">
+      <div class="field-error" id="registerError"></div>
+      <div class="actions" style="margin-top:10px;">
+        <button class="btn" id="doRegister">Konto erstellen</button>
+      </div>
+    </div>
+
+    <div class="auth-hint">Dein Passwort wird nur als Hash gespeichert (bcrypt) – niemand, auch nicht der Server-Betreiber, kann es im Klartext auslesen.</div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div class="wrap" id="appScreen" style="display:none;">
+  <header>
+    <div class="logo-block">
+      <div>
+        <div class="logo">Heftweise<span class="dot">.</span></div>
+        <div class="tagline">Alte Schulsachen finden neue Besitzer</div>
+      </div>
+      <div class="school-badge">SPORTSCHULE HALLE</div>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+      <div class="user-box">
+        <span class="who" id="whoAmI"></span>
+        <button class="btn link" id="logoutBtn">Abmelden</button>
+      </div>
+      <button class="btn" id="openNewListing">+ Inserat aufgeben</button>
+    </div>
+  </header>
+
+  <div class="searchbar">
+    <input type="text" id="searchInput" placeholder="Suche nach Titel, z. B. „Taschenrechner“ oder „Matheheft“…">
+  </div>
+
+  <div class="chips" id="categoryChips"></div>
+
+  <div class="grid" id="listingGrid"></div>
+  <div class="empty" id="emptyState" style="display:none;">
+    <span class="big">Noch nichts Passendes hier.</span>
+    Sei die Erste oder der Erste und stelle etwas rein.
+  </div>
+</div>
+
+<!-- Detail Modal -->
+<div class="overlay" id="detailOverlay">
+  <div class="modal" id="detailModal"></div>
+</div>
+
+<!-- New Listing Modal -->
+<div class="overlay" id="formOverlay">
+  <div class="modal">
+    <button class="close" id="closeForm">✕</button>
+    <h2>Neues Inserat</h2>
+    <div class="tagline" style="margin-bottom:4px;">Sichtbar für alle SSH-Schüler:innen hier.</div>
+
+    <label for="fTitle">Titel</label>
+    <input type="text" id="fTitle" placeholder="z. B. Geometrie-Set, kaum benutzt">
+
+    <label for="fCategory">Kategorie</label>
+    <select id="fCategory"></select>
+
+    <label for="fPrice">Preis (€, 0 für „zu verschenken“)</label>
+    <input type="number" id="fPrice" min="0" step="0.5" placeholder="5">
+
+    <label for="fCondition">Zustand</label>
+    <select id="fCondition">
+      <option>Wie neu</option>
+      <option>Gut erhalten</option>
+      <option>Deutliche Gebrauchsspuren</option>
+    </select>
+
+    <label for="fGrade">Für welche Klassenstufe?</label>
+    <input type="text" id="fGrade" placeholder="z. B. 5.–7. Klasse">
+
+    <label>Symbol wählen</label>
+    <div class="emoji-row" id="emojiRow"></div>
+
+    <label for="fDesc">Beschreibung</label>
+    <textarea id="fDesc" placeholder="Ein paar Sätze zum Artikel…"></textarea>
+
+    <div class="actions">
+      <button class="btn" id="submitListing">Inserat veröffentlichen</button>
+      <button class="btn secondary" id="cancelForm">Abbrechen</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const CATEGORIES = [
+  {id:'buecher', label:'Schulbücher', emoji:'📚'},
+  {id:'schreib', label:'Schreibwaren', emoji:'✏️'},
+  {id:'taschen', label:'Taschen & Mäppchen', emoji:'🎒'},
+  {id:'rechner', label:'Taschenrechner', emoji:'🧮'},
+  {id:'sport', label:'Sportzeug', emoji:'⚽'},
+  {id:'sonstiges', label:'Sonstiges', emoji:'📦'},
+];
+const EMOJI_CHOICES = ['📚','✏️','🎒','🧮','⚽','📐','🖍️','📓','🎨','👟','📦','🧪'];
+
+const SEED_LISTINGS = [
+  {id:'seed1', title:'Matheheft-Set, 5 Stück ungebraucht', category:'schreib', price:3, condition:'Wie neu', grade:'5.–7. Klasse', emoji:'📓', desc:'Original verpackt, kariert, DIN A4. Farbe zufällig.', contact:'Lena, 6a', createdAt:1},
+  {id:'seed2', title:'Casio Taschenrechner FX-87DE', category:'rechner', price:12, condition:'Gut erhalten', grade:'ab 8. Klasse', emoji:'🧮', desc:'Funktioniert einwandfrei, leichte Kratzer am Gehäuse. Anleitung liegt bei.', contact:'Marco, 10c', createdAt:2},
+  {id:'seed3', title:'Schulrucksack, dunkelblau', category:'taschen', price:15, condition:'Deutliche Gebrauchsspuren', grade:'5.–9. Klasse', emoji:'🎒', desc:'Ein Reißverschluss etwas schwergängig, sonst stabil. Viel Stauraum.', contact:'Amira, 7b', createdAt:3},
+  {id:'seed4', title:'Englischbuch „Green Line 3“', category:'buecher', price:0, condition:'Gut erhalten', grade:'7. Klasse', emoji:'📚', desc:'Zu verschenken, ein paar Bleistiftnotizen sind drin, lassen sich radieren.', contact:'Finn, 8a', createdAt:4},
+];
+
+let listings = [];
+let currentUser = null;
+let activeCategory = 'all';
+let selectedEmoji = EMOJI_CHOICES[0];
+
+const grid = document.getElementById('listingGrid');
+const emptyState = document.getElementById('emptyState');
+const chipsEl = document.getElementById('categoryChips');
+const toastEl = document.getElementById('toast');
+
+function showToast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  setTimeout(()=> toastEl.classList.remove('show'), 2200);
+}
+
+function categoryLabel(id){ const c = CATEGORIES.find(c=>c.id===id); return c ? c.label : id; }
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str || '';
+  return div.innerHTML;
+}
+
+/* ---------- AUTH ---------- */
+document.getElementById('tabLogin').onclick = ()=> switchAuthTab('login');
+document.getElementById('tabRegister').onclick = ()=> switchAuthTab('register');
+
+function switchAuthTab(which){
+  document.getElementById('tabLogin').classList.toggle('active', which==='login');
+  document.getElementById('tabRegister').classList.toggle('active', which==='register');
+  document.getElementById('loginForm').classList.toggle('active', which==='login');
+  document.getElementById('registerForm').classList.toggle('active', which==='register');
+}
+
+async function withRetry(fn, attempts=2){
+  let lastErr;
+  for(let i=0;i<attempts;i++){
+    try{ return await fn(); }
+    catch(e){ lastErr = e; await new Promise(r=>setTimeout(r, 300)); }
+  }
+  throw lastErr;
+}
+
+// Inserate kommen vom eigenen Server. Nutzerdaten/Passwörter bleiben serverseitig (Login/Registrierung
+// laufen über eigene Endpunkte, siehe unten) - der Client sieht nie einen Passwort-Hash.
+async function loadAppData(){
+  try{
+    const res = await withRetry(()=> fetch('/api/listings').then(r=>{
+      if(!r.ok) throw new Error('bad status ' + r.status);
+      return r.json();
+    }));
+    listings = (Array.isArray(res.listings) && res.listings.length) ? res.listings : SEED_LISTINGS.slice();
+  }catch(e){
+    listings = SEED_LISTINGS.slice();
+    showToast('Server nicht erreichbar – läuft nur in dieser Sitzung.');
+  }
+}
+
+let saveWarningShown = false;
+async function saveListings(){
+  try{
+    await withRetry(()=> fetch('/api/listings', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({listings})
+    }).then(r=>{ if(!r.ok) throw new Error('bad status ' + r.status); }));
+  }catch(e){
+    if(!saveWarningShown){
+      showToast('Speichern auf dem Server klappt gerade nicht.');
+      saveWarningShown = true;
+    }
+  }
+}
+
+// Nur der zuletzt verwendete Nutzername wird gemerkt (zum Vorausfüllen) - niemals das Passwort.
+const LAST_USERNAME_KEY = 'heftweise_last_username';
+function prefillLastUsername(){
+  const last = localStorage.getItem(LAST_USERNAME_KEY);
+  if(last){ document.getElementById('lUsername').value = last; }
+}
+
+document.getElementById('doLogin').onclick = async ()=>{
+  const username = document.getElementById('lUsername').value.trim();
+  const password = document.getElementById('lPassword').value;
+  const errEl = document.getElementById('loginError');
+  errEl.textContent = '';
+  if(!username || !password){
+    errEl.textContent = 'Bitte Nutzername und Passwort angeben.';
+    return;
+  }
+  try{
+    const r = await fetch('/api/login', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({username, password})
+    });
+    const data = await r.json();
+    if(!r.ok){
+      errEl.textContent = data.error || 'Anmeldung fehlgeschlagen.';
+      return;
+    }
+    currentUser = data.user;
+    localStorage.setItem(LAST_USERNAME_KEY, username);
+    document.getElementById('lPassword').value = '';
+    enterApp();
+  }catch(e){
+    errEl.textContent = 'Server nicht erreichbar.';
+  }
+};
+
+document.getElementById('doRegister').onclick = async ()=>{
+  const name = document.getElementById('rName').value.trim();
+  const klasse = document.getElementById('rKlasse').value.trim();
+  const username = document.getElementById('rUsername').value.trim();
+  const password = document.getElementById('rPassword').value;
+  const errEl = document.getElementById('registerError');
+  errEl.textContent = '';
+
+  if(!name || !klasse || !username || !password){
+    errEl.textContent = 'Bitte alle Felder ausfüllen.';
+    return;
+  }
+  if(password.length < 6){
+    errEl.textContent = 'Passwort muss mindestens 6 Zeichen haben.';
+    return;
+  }
+  try{
+    const r = await fetch('/api/register', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({username, password, name, klasse})
+    });
+    const data = await r.json();
+    if(!r.ok){
+      errEl.textContent = data.error || 'Registrierung fehlgeschlagen.';
+      return;
+    }
+    currentUser = data.user;
+    localStorage.setItem(LAST_USERNAME_KEY, username);
+    enterApp();
+  }catch(e){
+    errEl.textContent = 'Server nicht erreichbar.';
+  }
+};
+
+document.getElementById('logoutBtn').onclick = ()=>{
+  currentUser = null;
+  document.getElementById('appScreen').style.display = 'none';
+  document.getElementById('authScreen').style.display = 'flex';
+  switchAuthTab('login');
+  document.getElementById('lPassword').value = '';
+};
+
+function enterApp(){
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('appScreen').style.display = 'block';
+  document.getElementById('whoAmI').innerHTML = `Angemeldet als ${escapeHtml(currentUser.name)} <span class="klasse">(${escapeHtml(currentUser.klasse)})</span>`;
+  renderChips();
+  renderGrid();
+}
+
+/* ---------- LISTINGS ---------- */
+function renderChips(){
+  chipsEl.innerHTML = '';
+  const allChip = document.createElement('div');
+  allChip.className = 'chip' + (activeCategory==='all' ? ' active' : '');
+  allChip.textContent = 'Alle';
+  allChip.onclick = ()=>{ activeCategory='all'; renderChips(); renderGrid(); };
+  chipsEl.appendChild(allChip);
+
+  CATEGORIES.forEach(cat=>{
+    const chip = document.createElement('div');
+    chip.className = 'chip' + (activeCategory===cat.id ? ' active' : '');
+    chip.textContent = cat.emoji + ' ' + cat.label;
+    chip.onclick = ()=>{ activeCategory=cat.id; renderChips(); renderGrid(); };
+    chipsEl.appendChild(chip);
+  });
+}
+
+function renderGrid(){
+  const query = document.getElementById('searchInput').value.trim().toLowerCase();
+  let filtered = listings.filter(l=>{
+    const matchesCat = activeCategory==='all' || l.category===activeCategory;
+    const matchesQuery = !query || l.title.toLowerCase().includes(query) || l.desc.toLowerCase().includes(query);
+    return matchesCat && matchesQuery;
+  });
+  filtered.sort((a,b)=> b.createdAt - a.createdAt);
+
+  grid.innerHTML = '';
+  if(filtered.length === 0){ emptyState.style.display = 'block'; return; }
+  emptyState.style.display = 'none';
+
+  filtered.forEach(l=>{
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="pin"></div>
+      <div class="thumb">${l.emoji}</div>
+      <div class="title">${escapeHtml(l.title)}</div>
+      <div class="meta">${categoryLabel(l.category)} · ${escapeHtml(l.grade || '')}</div>
+      <div class="price">${l.price > 0 ? l.price.toFixed(2).replace('.',',') + ' €' : 'Zu verschenken'}</div>
+    `;
+    card.onclick = ()=> openDetail(l);
+    grid.appendChild(card);
+  });
+}
+
+function openDetail(l){
+  const modal = document.getElementById('detailModal');
+  modal.innerHTML = `
+    <button class="close" onclick="document.getElementById('detailOverlay').classList.remove('show')">✕</button>
+    <div class="detail-thumb">${l.emoji}</div>
+    <h2>${escapeHtml(l.title)}</h2>
+    <div class="detail-price">${l.price > 0 ? l.price.toFixed(2).replace('.',',') + ' €' : 'Zu verschenken'}</div>
+    <div class="detail-meta">${categoryLabel(l.category)} · ${escapeHtml(l.condition)} · ${escapeHtml(l.grade || '')}</div>
+    <div class="detail-desc">${escapeHtml(l.desc)}</div>
+    <label>Kontakt</label>
+    <div style="font-weight:700;">${escapeHtml(l.contact)}</div>
+    <div class="actions">
+      <button class="btn small" onclick="showToast('Nachricht an ${escapeHtml(l.contact)} simuliert 🎉')">Nachricht schreiben</button>
+    </div>
+  `;
+  document.getElementById('detailOverlay').classList.add('show');
+}
+
+function setupForm(){
+  const catSelect = document.getElementById('fCategory');
+  CATEGORIES.forEach(cat=>{
+    const opt = document.createElement('option');
+    opt.value = cat.id;
+    opt.textContent = cat.emoji + ' ' + cat.label;
+    catSelect.appendChild(opt);
+  });
+
+  const emojiRow = document.getElementById('emojiRow');
+  EMOJI_CHOICES.forEach((em,i)=>{
+    const btn = document.createElement('div');
+    btn.className = 'emoji-choice' + (i===0 ? ' selected' : '');
+    btn.textContent = em;
+    btn.onclick = ()=>{
+      selectedEmoji = em;
+      document.querySelectorAll('.emoji-choice').forEach(e=>e.classList.remove('selected'));
+      btn.classList.add('selected');
+    };
+    emojiRow.appendChild(btn);
+  });
+}
+
+function resetForm(){
+  document.getElementById('fTitle').value='';
+  document.getElementById('fPrice').value='';
+  document.getElementById('fGrade').value='';
+  document.getElementById('fDesc').value='';
+  document.getElementById('fCategory').selectedIndex=0;
+  document.getElementById('fCondition').selectedIndex=0;
+  selectedEmoji = EMOJI_CHOICES[0];
+  document.querySelectorAll('.emoji-choice').forEach((e,i)=>e.classList.toggle('selected', i===0));
+}
+
+document.getElementById('openNewListing').onclick = ()=>{
+  resetForm();
+  document.getElementById('formOverlay').classList.add('show');
+};
+document.getElementById('closeForm').onclick = ()=> document.getElementById('formOverlay').classList.remove('show');
+document.getElementById('cancelForm').onclick = ()=> document.getElementById('formOverlay').classList.remove('show');
+
+document.getElementById('submitListing').onclick = async ()=>{
+  const title = document.getElementById('fTitle').value.trim();
+  if(!title){ showToast('Bitte einen Titel angeben'); return; }
+  const newListing = {
+    id: 'l' + Date.now(),
+    title,
+    category: document.getElementById('fCategory').value,
+    price: parseFloat(document.getElementById('fPrice').value) || 0,
+    condition: document.getElementById('fCondition').value,
+    grade: document.getElementById('fGrade').value.trim(),
+    emoji: selectedEmoji,
+    desc: document.getElementById('fDesc').value.trim(),
+    contact: `${currentUser.name}, ${currentUser.klasse}`,
+    createdAt: Date.now(),
+  };
+  listings.push(newListing);
+  await saveListings();
+  document.getElementById('formOverlay').classList.remove('show');
+  renderChips();
+  renderGrid();
+  showToast('Inserat veröffentlicht 🎉');
+};
+
+document.getElementById('searchInput').addEventListener('input', renderGrid);
+document.getElementById('detailOverlay').addEventListener('click', (e)=>{ if(e.target.id === 'detailOverlay') e.target.classList.remove('show'); });
+document.getElementById('formOverlay').addEventListener('click', (e)=>{ if(e.target.id === 'formOverlay') e.target.classList.remove('show'); });
+
+/* ---------- INIT ---------- */
+async function init(){
+  setupForm();
+  await loadAppData();
+  document.getElementById('authScreen').style.display = 'flex';
+  prefillLastUsername();
+}
+init();
+</script>
+</body>
+</html>

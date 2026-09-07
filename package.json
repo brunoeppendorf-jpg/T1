@@ -1,0 +1,13 @@
+{
+  "name": "heftweise-server",
+  "version": "1.0.0",
+  "description": "Selbst gehosteter Server fuer die Heftweise Schulsachen-Boerse (Sportschule Halle)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "bcryptjs": "^2.4.3"
+  }
+}
