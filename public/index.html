@@ -14,8 +14,8 @@
     --ink:#232C3B;
     --ink-soft:#5b6472;
     --highlight:#F4C95D;
-    --chalk-green:#3F6B4E;
-    --chalk-green-dark:#2E4F39;
+    --chalk-green:#8B0000;
+    --chalk-green-dark:#8B0000;
     --card-shadow: 2px 4px 0 rgba(35,44,59,0.08);
   }
   *{box-sizing:border-box;}
@@ -263,7 +263,8 @@
     </div>
 
     <div class="auth-hint"<
-      >©Bruno Eppendorf Mit der Anmeldung bestätigen Sie Ihre Angaben. Ihre Daten werden verschlüsselt und datenschutzkonform gespeichert.</div>
+      >©Bruno Eppendorf
+      Mit der Anmeldung bestätigen Sie Ihre Angaben. Ihre Daten werden verschlüsselt und datenschutzkonform gespeichert.</div>
   </div>
 </div>
 
@@ -272,7 +273,7 @@
   <header>
     <div class="logo-block">
       <div>
-        <div class="logo">Platzhalr<span class="dot">.</span></div>
+        <div class="logo">Platzhaler<span class="dot">.</span></div>
         <div class="tagline">Alte Schulsachen finden neue Besitzer</div>
       </div>
       <div class="school-badge">SPORTSCHULE HALLE</div>
@@ -294,7 +295,7 @@
 
   <div class="grid" id="listingGrid"></div>
   <div class="empty" id="emptyState" style="display:none;">
-    <span class="big">Noch nichts Passendes hier.</span>
+    <span class="big">Noch nichts Passendes hier?.</span>
     Sei die Erste oder der Erste und stelle etwas rein.
   </div>
 </div>
@@ -309,7 +310,7 @@
   <div class="modal">
     <button class="close" id="closeForm">✕</button>
     <h2>Neues Inserat</h2>
-    <div class="tagline" style="margin-bottom:4px;">Sichtbar für alle SSH-Schüler:innen hier.</div>
+    <div class="tagline" style="margin-bottom:4px;">Sichtbar für alle SSH-Schüler*innen hier.</div>
 
     <label for="fTitle">Titel</label>
     <input type="text" id="fTitle" placeholder="z. B. Geometrie-Set, kaum benutzt">
@@ -407,8 +408,6 @@ async function withRetry(fn, attempts=2){
   throw lastErr;
 }
 
-// Inserate kommen vom eigenen Server. Nutzerdaten/Passwörter bleiben serverseitig (Login/Registrierung
-// laufen über eigene Endpunkte, siehe unten) - der Client sieht nie einen Passwort-Hash.
 async function loadAppData(){
   try{
     const res = await withRetry(()=> fetch('/api/listings').then(r=>{
@@ -438,7 +437,6 @@ async function saveListings(){
   }
 }
 
-// Nur der zuletzt verwendete Nutzername wird gemerkt (zum Vorausfüllen) - niemals das Passwort.
 const LAST_USERNAME_KEY = 'heftweise_last_username';
 function prefillLastUsername(){
   const last = localStorage.getItem(LAST_USERNAME_KEY);
