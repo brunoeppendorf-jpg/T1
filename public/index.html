@@ -9,7 +9,7 @@
 <style>
   :root{
     --paper:#FBF7EE;
-    --paper-line:#00000;
+    --paper-line:#2e2e2e;
     --margin-red:#B23A48;
     --ink:#232C3B;
     --ink-soft:#5b6472;
@@ -323,6 +323,7 @@
 
     <label for="fCondition">Zustand</label>
     <select id="fCondition">
+      <option>neu</option>
       <option>Wie neu</option>
       <option>Gut erhalten</option>
       <option>Deutliche Gebrauchsspuren</option>
@@ -358,10 +359,10 @@ const CATEGORIES = [
 const EMOJI_CHOICES = ['📚','✏️','🎒','🧮','⚽','📐','🖍️','📓','🎨','👟','📦','🧪'];
 // Nur Probe Inserate 08.09.2026 BE
 const SEED_LISTINGS = [
-  {id:'seed1', title:'Matheheft-Set, 5 Stück ungebraucht', category:'schreib', price:3, condition:'Wie neu', grade:'5.–7. Klasse', emoji:'📓', desc:'Original verpackt, kariert, DIN A4. Farbe zufällig.', contact:'Lena, 6a', createdAt:1},
-  {id:'seed2', title:'Casio Taschenrechner FX-87DE', category:'rechner', price:12, condition:'Gut erhalten', grade:'ab 8. Klasse', emoji:'🧮', desc:'Funktioniert einwandfrei, leichte Kratzer am Gehäuse. Anleitung liegt bei.', contact:'Marco, 10c', createdAt:2},
-  {id:'seed3', title:'Schulrucksack, dunkelblau', category:'taschen', price:15, condition:'Deutliche Gebrauchsspuren', grade:'5.–9. Klasse', emoji:'🎒', desc:'Ein Reißverschluss etwas schwergängig, sonst stabil. Viel Stauraum.', contact:'Amira, 7b', createdAt:3},
-  {id:'seed4', title:'Englischbuch „Green Line 3“', category:'buecher', price:0, condition:'Gut erhalten', grade:'7. Klasse', emoji:'📚', desc:'Zu verschenken, ein paar Bleistiftnotizen sind drin, lassen sich radieren.', contact:'Finn, 8a', createdAt:4},
+  {id:'seed1', title:'Matheheft-Set, 5 Stück', category:'schreib', price:3, condition:'Wie neu', grade:'5.–7. Klasse', emoji:'📓', desc:'Original verpackt, kariert, DIN A4. Farbe zufällig.', contact:'Lena, 6a', createdAt:1},
+  {id:'seed2', title:'Casio Taschenrechner', category:'rechner', price:12, condition:'Gut erhalten', grade:'ab 8. Klasse', emoji:'🧮', desc:'Funktioniert einwandfrei, leichte Kratzer am Gehäuse. Anleitung liegt bei.', contact:'Marco, 10c', createdAt:2},
+  {id:'seed3', title:'Schulrucksack', category:'taschen', price:15, condition:'Deutliche Gebrauchsspuren', grade:'5.–9. Klasse', emoji:'🎒', desc:'Ein Reißverschluss etwas schwergängig, sonst stabil. Viel Stauraum.', contact:'Amira, 7b', createdAt:3},
+  {id:'seed4', title:'Englischbuch', category:'buecher', price:1000, condition:'Gut erhalten', grade:'7. Klasse', emoji:'📚', desc:'Zu verschenken, ein paar Bleistiftnotizen sind drin, lassen sich radieren.', contact:'Finn, 8a', createdAt:4},
 ];
 
 let listings = [];
